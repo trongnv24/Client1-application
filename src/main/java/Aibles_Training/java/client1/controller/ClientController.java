@@ -47,4 +47,12 @@ public class ClientController {
         log.info( " === Finish api update client, Client Id : {} === ", response.getId());
         return response;
     }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteById(@PathVariable("id") String id) {
+        log.info(" === Start api deleteById client === ");
+        log.info(" === String id {} : === ", id);
+        log.info(" === Finish api deleteById client, Client Id : {} === ");
+        service.deleteById(id);
+    }
 }

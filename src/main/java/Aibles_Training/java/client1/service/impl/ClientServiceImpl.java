@@ -63,4 +63,15 @@ public class ClientServiceImpl implements ClientService {
         log.info(" === Finish api update client, Client Id {} : ", response.getId());
         return response;
     }
+    @Override
+    public void deleteById(String id) {
+        log.info(" === Start api deleteById client === ");
+        log.info(" === String id : {} === ", id);
+        Optional<ClientEntity> optionalClient= clientRepository.findById(id);
+        if (!optionalClient.isPresent()){
+            throw new RuntimeException();
+        }
+        log.info(" Finish api deleteById client, Client Id : {} === ");
+        clientRepository.deleteById(id);
+    }
 }

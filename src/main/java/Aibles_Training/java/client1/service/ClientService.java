@@ -7,4 +7,5 @@ public interface ClientService {
     ClientResponse create (ClientRequest request);
     ClientResponse getById(String id);
     ClientResponse update(ClientRequest request, String id);
+    void deleteById(String id);
 }
