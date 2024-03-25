@@ -3,6 +3,7 @@ package Aibles_Training.java.client1.service.impl;
 import Aibles_Training.java.client1.dto.request.ClientRequest;
 import Aibles_Training.java.client1.dto.response.ClientResponse;
 import Aibles_Training.java.client1.entity.ClientEntity;
+import Aibles_Training.java.client1.exception.NotFoundException;
 import Aibles_Training.java.client1.repository.ClientRepository;
 import Aibles_Training.java.client1.service.ClientService;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +39,7 @@ public class ClientServiceImpl implements ClientService {
         log.info(" === String id : {} === ", id);
         Optional<ClientEntity> optionalClient = clientRepository.findById(id);
         if( !optionalClient.isPresent()){
-            throw new RuntimeException();
+            throw new NotFoundException("khong tim thay", id ,null);
         }
         ClientEntity clientEntity = optionalClient.get();
         ClientResponse response = covertEntityToClientResponse(clientEntity);
