@@ -5,4 +5,5 @@ import Aibles_Training.java.client1.dto.response.ClientResponse;
 
 public interface ClientService {
     ClientResponse create (ClientRequest request);
+    ClientResponse getById(String id);
 }

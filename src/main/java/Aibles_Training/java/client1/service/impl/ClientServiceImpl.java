@@ -8,6 +8,8 @@ import Aibles_Training.java.client1.service.ClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 import static Aibles_Training.java.client1.service.mapping.ClientMapping.convertDtoToEntity;
 import static Aibles_Training.java.client1.service.mapping.ClientMapping.covertEntityToClientResponse;
 
@@ -29,5 +31,18 @@ public class ClientServiceImpl implements ClientService {
         ClientResponse response = covertEntityToClientResponse(entity);
         log.info(" === Finish api create new client, Client Id {} : ", response.getId());
         return response;
+    }
+    @Override
+    public ClientResponse getById(String id) {
+        log.info(" === Start api getById client === ");
+        log.info(" === String id : {} === ", id);
+        Optional<ClientEntity> optionalClient = clientRepository.findById(id);
+        if( !optionalClient.isPresent()){
+            throw new RuntimeException();
+        }
+        ClientEntity clientEntity = optionalClient.get();
+        ClientResponse response = covertEntityToClientResponse(clientEntity);
+        log.info(" === Finish api getById client, Client Id {} : === ", response.getId());
+        return response ;
     }
 }
