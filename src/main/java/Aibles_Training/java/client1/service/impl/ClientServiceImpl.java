@@ -45,4 +45,22 @@ public class ClientServiceImpl implements ClientService {
         log.info(" === Finish api getById client, Client Id {} : === ", response.getId());
         return response ;
     }
+    @Override
+    public ClientResponse update (ClientRequest request, String id){
+        log.info(" === Start api update client === ");
+        log.info(" === Request Body : {}, String id : {} === ", request, id);
+        Optional<ClientEntity> optionalClient = clientRepository.findById(id);
+        if (!optionalClient.isPresent()){
+            throw new RuntimeException();
+        }
+        ClientEntity clientEntity = optionalClient.get();
+        clientEntity.setName(request.getName());
+        clientEntity.setEmail(request.getEmail());
+        clientEntity.setAddress(request.getAddress());
+        clientEntity.setGender(request.getGender());
+        clientEntity = clientRepository.save(clientEntity);
+        ClientResponse response = covertEntityToClientResponse(clientEntity);
+        log.info(" === Finish api update client, Client Id {} : ", response.getId());
+        return response;
+    }
 }
